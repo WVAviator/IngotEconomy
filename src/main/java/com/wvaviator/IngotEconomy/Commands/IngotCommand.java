@@ -44,7 +44,7 @@ public class IngotCommand extends CommandBase implements ICommand {
 	@Override
 	public void execute(ICommandSender sender, String[] args) throws CommandException {
 		
-		if (args.length < 3) {
+		if (args.length < 3 || args.length > 3) {
 			Chat.sendChat(sender, "Incorrect number of arguments!");
 			Chat.sendChat(sender, getCommandUsage(sender));
 			return;
@@ -69,17 +69,17 @@ public class IngotCommand extends CommandBase implements ICommand {
 		Account acct = new Account(uuid);
 		if (args[0].equalsIgnoreCase("set") {
 			acct.set(amount);
-			Chat.sendChat(sender, "You set " + acct.getName() + "'s account to " + AccountManager.format(amount) + "!";
+			Chat.sendChat(sender, "You set " + acct.getName() + "'s account to " + AccountManager.formatAmount(amount) + "!";
 			return;
 		}
 		if (args[0].equalsIgnoreCase("give")) {
 			acct.add(amount);
-			Chat.sendChat(sender, "You added " + AccountManager.format(amount) + " to " + acct.getName() + "'s account.";
+			Chat.sendChat(sender, "You added " + AccountManager.formatAmount(amount) + " to " + acct.getName() + "'s account.";
 			return;
 		}
 		if (args[0].equalsIgnoreCase("take")) {
 			acct.subtract(amount);
-			Chat.sendChat(sender, "You took " + AccountManager.format(amount) + " from " + acct.getName() + "'s account.";
+			Chat.sendChat(sender, "You took " + AccountManager.formatAmount(amount) + " from " + acct.getName() + "'s account.";
 			return;
 		}
 		Chat.sendChat(sender, "Incorrect argument!");
@@ -94,7 +94,10 @@ public class IngotCommand extends CommandBase implements ICommand {
 
 	@Override
 	public List addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
-		
+		if (args.length == 1) {
+			String[] subcommand = {"give", "take", "set"};
+			return getListOfStringsMatchingLastWord(args, subcommand);
+		}
 		if (args.length == 2) {
 			return getListOfStringsMatchingLastWord(args, MinecraftServer.getServer().getAllUsernames());
 		}
