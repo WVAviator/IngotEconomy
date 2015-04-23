@@ -66,7 +66,7 @@ public class BalanceCommand extends CommandBase implements ICommand {
 		}
 		Account acct = new Account(uuid);
 		double amount = acct.getBalance();
-		Chat.sendChat(sender, "The balance for " + acct.getName() + " is " + amount);
+		Chat.sendChat(sender, "The balance for " + acct.getName() + " is " + AccountManager.formatAmount(amount) + " " + IngotConfiguration.curName);
 	}
 
 	@Override
