@@ -1,13 +1,11 @@
 package com.wvaviator.IngotEconomy;
 
-import java.math.BigDecimal;
-
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
 public class IngotConfiguration {
 	
-	public static BigDecimal startingBalance;
+	public static double startingBalance;
 	public static int payPerm;
 	public static int balPerm;
 	public static int balOthersPerm;
@@ -20,7 +18,7 @@ public class IngotConfiguration {
 		config.addCustomCategoryComment("Basic Account Options", "Configure basic account information such as starting balances");
 		
 		Property b1 = config.get("Basic Account Options", "Default Starting Balance", 20.00);
-		startingBalance = BigDecimal.valueOf(b1.getDouble());
+		startingBalance = b1.getDouble();
 		b1.comment = "This will determine the amount to give new players upon first joining";
 		
 		Property b2 = config.get("Basic Account Options", "Currency Name", "dollars");
