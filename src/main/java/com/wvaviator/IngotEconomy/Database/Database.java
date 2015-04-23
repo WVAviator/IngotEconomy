@@ -25,13 +25,14 @@ public class Database {
 	
 	public static void createDatabase() {
 		
-		if (driverFile.exists())
+		if (!(driverFile.exists())) {
 			try {
 				copyDriverFromJar();
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 				logger.error("Something went wrong while attempting to locate driver file");
 			}
+		}
 		
 		getConnection();
 		closeConnection();
