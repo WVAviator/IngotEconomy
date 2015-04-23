@@ -44,6 +44,46 @@ public class IngotCommand extends CommandBase implements ICommand {
 	@Override
 	public void execute(ICommandSender sender, String[] args) throws CommandException {
 		
+		if (args.length < 3) {
+			Chat.sendChat(sender, "Incorrect number of arguments!");
+			Chat.sendChat(sender, getCommandUsage(sender));
+			return;
+		}
+		double amount = 0;
+		try {
+			amount = Double.parseDouble(args[2]);
+		} catch (NumberFormatException e) {
+			Chat.sendChat(sender, "The third argument must be a number!");
+			Chat.sendChat(sender, getCommandUsage(sender));
+			return;
+		}
+		if (amount <= 0) {
+			Chat.sendChat(sender, "Negative numbers cannot be used!");
+			return;
+		}
+		String uuid = PlayerManager.getUUID(args[1]);
+		if (uuid == null) {
+			Chat.sendChat(sender, Chat.playerNotFound);
+			return;
+		}
+		Account acct = new Account(uuid);
+		if (args[0].equalsIgnoreCase("set") {
+			acct.set(amount);
+			Chat.sendChat(sender, "You set " + acct.getName() + "'s account to " + AccountManager.format(amount) + "!";
+			return;
+		}
+		if (args[0].equalsIgnoreCase("give")) {
+			acct.add(amount);
+			Chat.sendChat(sender, "You added " + AccountManager.format(amount) + " to " + acct.getName() + "'s account.";
+			return;
+		}
+		if (args[0].equalsIgnoreCase("take")) {
+			acct.subtract(amount);
+			Chat.sendChat(sender, "You took " + AccountManager.format(amount) + " from " + acct.getName() + "'s account.";
+			return;
+		}
+		Chat.sendChat(sender, "Incorrect argument!");
+		Chat.sendChat(sender, getCommandUsage(sender));
 
 	}
 
@@ -55,7 +95,7 @@ public class IngotCommand extends CommandBase implements ICommand {
 	@Override
 	public List addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
 		
-		if (args.length == 1) {
+		if (args.length == 2) {
 			return getListOfStringsMatchingLastWord(args, MinecraftServer.getServer().getAllUsernames());
 		}
 		return null;
