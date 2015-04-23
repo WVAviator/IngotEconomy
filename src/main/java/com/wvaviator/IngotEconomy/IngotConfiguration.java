@@ -47,6 +47,7 @@ public class IngotConfiguration {
 		balTopPerm = p4.getInt();
 		ingotPerm = p5.getInt();
 		
+		config.save();
 	}
 
 }
