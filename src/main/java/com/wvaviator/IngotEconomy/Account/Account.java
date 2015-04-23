@@ -37,22 +37,25 @@ public class Account {
 		Data.sendUpdate(update);
 	}
 	
-	public void add(double amount) {
-		if (IngotEconomy.EVENT_BUS.post(new BalanceIncreaseEvent(this.uuid, this.balance, amount))) return;
+	public boolean add(double amount) {
+		if (IngotEconomy.EVENT_BUS.post(new BalanceIncreaseEvent(this.uuid, this.balance, amount))) return true;
 		this.balance += amount;
 		save();
+		return false;
 	}
 	
-	public void subtract(double amount) {
-		if (IngotEconomy.EVENT_BUS.post(new BalanceDecreaseEvent(this.uuid, this.balance, amount))) return;
+	public boolean subtract(double amount) {
+		if (IngotEconomy.EVENT_BUS.post(new BalanceDecreaseEvent(this.uuid, this.balance, amount))) return true;
 		this.balance -= amount;
 		save();
+		return false;
 	}
 	
-	public void set(double amount) {
-		if (IngotEconomy.EVENT_BUS.post(new BalanceSetEvent(this.uuid, this.balance, amount))) return;
+	public boolean set(double amount) {
+		if (IngotEconomy.EVENT_BUS.post(new BalanceSetEvent(this.uuid, this.balance, amount))) return true;
 		this.balance = amount;
 		save();
+		return false;
 	}
 	
 	public boolean canAfford(double amount) {
