@@ -24,7 +24,7 @@ public class IngotConfiguration {
 		b1.comment = "This will determine the amount to give new players upon first joining";
 		
 		Property b2 = config.get("Basic Account Options", "Currency Name", "dollars");
-		curName = b2.getString();
+		curName = b2.getString() + " ";
 		b2.comment = "This name will appear in chat after currency is display, for example \'20.00 dollars\'";
 		
 		config.addCustomCategoryComment("Permissions", "Set permissions for each command. 1 = Any player, 2 = Creative Mode, 4 = Operator");
