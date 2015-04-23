@@ -1,6 +1,5 @@
 package com.wvaviator.IngotEconomy.Account;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +16,7 @@ public class AccountManager {
 	public static void createNewAccount(EntityPlayer player) {
 		String update = "INSERT INTO accounts VALUES ('" + player.getUniqueID().toString() + "', " + IngotConfiguration.startingBalance + ")";
 		Data.sendUpdate(update);
+		IngotEconomy.logger.info("Setting default balance for " + player.getName());
 	}
 
 	public static String formatAmount(double amount) {
