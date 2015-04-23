@@ -49,26 +49,21 @@ public class BalanceCommand extends CommandBase implements ICommand {
 			Chat.sendChat(sender, Chat.noConsole);
 			return;
 		}
-			
 		if (args.length > 1) {
 			Chat.sendChat(sender, "You may only check one player's balance at a time");
 			return;
 		}
-			
 		String uuid = null;
-		
 		if (args.length == 0) {
 			EntityPlayer player = (EntityPlayer) sender;
 			uuid = player.getUniqueID().toString();
 		} else {
 			uuid = PlayerManager.getUUID(args[0]);
 		}
-		
 		if (uuid == null) {
 			Chat.sendChat(sender, Chat.playerNotFound);
 			return;
 		}
-		
 		Account acct = new Account(uuid);
 		double amount = acct.getBalance();
 		Chat.sendChat(sender, "The balance for " + acct.getName() + " is " + amount);
@@ -96,5 +91,4 @@ public class BalanceCommand extends CommandBase implements ICommand {
 	public int compareTo(Object o) {
 		return 0;
 	}
-
 }
