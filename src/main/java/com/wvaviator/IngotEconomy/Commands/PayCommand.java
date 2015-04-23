@@ -67,7 +67,13 @@ public class PayCommand extends CommandBase implements ICommand {
 		try {
 			amount = Double.parseDouble(args[1]);
 		} catch (NumberFormatException e) {
-			getCommandUsage(player);
+			Chat.sendChat(player, "Incorrect argument! You must use a real number!");
+			return;
+		}
+		
+		if (amount <= 0) {
+			Chat.sendChat(player, "You must provide a positive, non-zero number!");
+			return;
 		}
 		
 		Account acct = new Account(player.getUniqueID().toString());
@@ -78,6 +84,11 @@ public class PayCommand extends CommandBase implements ICommand {
 		}
 		
 		Account receive = new Account(receiver);
+		
+		if (acct.equals(receive)) {
+			Chat.sendChat(player, "You cannot pay yourself!");
+			return;
+		}
 		
 		acct.transferToAccount(receive, amount);
 		Chat.sendChat(player, "You sent " + AccountManager.formatAmount(amount) + " to " + receive.getName());
