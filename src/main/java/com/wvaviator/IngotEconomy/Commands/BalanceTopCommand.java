@@ -65,7 +65,7 @@ public class BalanceTopCommand extends CommandBase implements ICommand {
 		for (int i = ((page - 1) * 10) + 1; i < ((page * 10) + 1); i++) {
 			if (topAccounts.size() == (i-1)) break;
 			Account acct = topAccounts.get(i-1);
-			Chat.sendChat(sender, i + ". " + acct.getName() + " - " + acct.getBalance());
+			Chat.sendChat(sender, i + ". " + acct.getName() + " - " + acct.getFormattedBalance() + IngotConfiguration.curName);
 		}
 
 	}
