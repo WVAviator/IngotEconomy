@@ -69,17 +69,17 @@ public class IngotCommand extends CommandBase implements ICommand {
 		Account acct = new Account(uuid);
 		if (args[0].equalsIgnoreCase("set") {
 			acct.set(amount);
-			Chat.sendChat(sender, "You set " + acct.getName() + "'s account to " + AccountManager.formatAmount(amount) + IngotConfiguration.curName + "!";
+			Chat.sendChat(sender, "You set " + acct.getName() + "'s account to " + AccountManager.formatAmount(amount) + IngotConfiguration.curName;
 			return;
 		}
 		if (args[0].equalsIgnoreCase("give")) {
 			acct.add(amount);
-			Chat.sendChat(sender, "You added " + AccountManager.formatAmount(amount) + " to " + acct.getName() + "'s account.";
+			Chat.sendChat(sender, "You added " + AccountManager.formatAmount(amount) + IngotConfiguration.curName + "to " + acct.getName() + "'s account";
 			return;
 		}
 		if (args[0].equalsIgnoreCase("take")) {
 			acct.subtract(amount);
-			Chat.sendChat(sender, "You took " + AccountManager.formatAmount(amount) + " from " + acct.getName() + "'s account.";
+			Chat.sendChat(sender, "You took " + AccountManager.formatAmount(amount) + IngotConfiguration.curName + "from " + acct.getName() + "'s account";
 			return;
 		}
 		Chat.sendChat(sender, "Incorrect argument!");
