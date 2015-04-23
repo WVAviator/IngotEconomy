@@ -90,7 +90,7 @@ public class PayCommand extends CommandBase implements ICommand {
 			return;
 		}
 		
-		acct.transferToAccount(receive, amount);
+		if (acct.transferToAccount(receive, amount)) return;
 		Chat.sendChat(player, "You sent " + AccountManager.formatAmount(amount) + IngotConfiguration.curName "to " + receive.getName());
 		Chat.sendToPlayer(receive.getName(), "You received " + AccountManager.formatAmount(amount) + IngotConfiguration.curName + "from " + acct.getName());
 	}
