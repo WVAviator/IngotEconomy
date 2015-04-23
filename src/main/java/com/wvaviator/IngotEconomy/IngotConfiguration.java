@@ -13,6 +13,7 @@ public class IngotConfiguration {
 	public static int balOthersPerm;
 	public static int balTopPerm;
 	public static int ingotPerm;
+	public static String curName;
 	
 	public static void setupConfig(Configuration config) {
 		
@@ -21,6 +22,10 @@ public class IngotConfiguration {
 		Property b1 = config.get("Basic Account Options", "Default Starting Balance", 20.00);
 		startingBalance = BigDecimal.valueOf(b1.getDouble());
 		b1.comment = "This will determine the amount to give new players upon first joining";
+		
+		Property b2 = config.get("Basic Account Options", "Currency Name", "dollars");
+		curName = b2.getString();
+		b2.comment = "This name will appear in chat after currency is display, for example \'20.00 dollars\'";
 		
 		config.addCustomCategoryComment("Permissions", "Set permissions for each command. 1 = Any player, 2 = Creative Mode, 4 = Operator");
 		
