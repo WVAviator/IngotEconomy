@@ -64,12 +64,13 @@ public class Account {
 	}
 	
 	public void transferToAccount(Account account, double amount) {
-		if (amount > this.balance) return;
-		if (IngotEconomy.EVENT_BUS.post(new BalanceTransferEvent(this.uuid, this.balance, amount, account.uuid, account.balance))) return;
+		if (amount > this.balance) return true;
+		if (IngotEconomy.EVENT_BUS.post(new BalanceTransferEvent(this.uuid, this.balance, amount, account.uuid, account.balance))) return true;
 		this.balance -= amount;
 		account.balance += amount;
 		save();
 		account.save();
+		return false;
 	}
 	
 	public double getBalance() {
