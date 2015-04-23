@@ -91,8 +91,8 @@ public class PayCommand extends CommandBase implements ICommand {
 		}
 		
 		acct.transferToAccount(receive, amount);
-		Chat.sendChat(player, "You sent " + AccountManager.formatAmount(amount) + IngotConfiguration.curName " to " + receive.getName());
-		Chat.sendToPlayer(receive.getName(), "You received " + AccountManager.formatAmount(amount) + IngotConfiguration.curName + " from " + acct.getName());
+		Chat.sendChat(player, "You sent " + AccountManager.formatAmount(amount) + IngotConfiguration.curName "to " + receive.getName());
+		Chat.sendToPlayer(receive.getName(), "You received " + AccountManager.formatAmount(amount) + IngotConfiguration.curName + "from " + acct.getName());
 	}
 
 	@Override
