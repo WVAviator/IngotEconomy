@@ -45,50 +45,33 @@ public class BalanceCommand extends CommandBase implements ICommand {
 	@Override
 	public void execute(ICommandSender sender, String[] args) throws CommandException {
 		
-		if (!(sender instanceof EntityPlayer)) {
-			if (args.length == 0) {
-				Chat.sendChat(sender, Chat.noConsole);
-				return;
-			}
-			
-			if (args.length > 1) {
-				Chat.sendChat(sender, getCommandUsage(sender));
-				return;
-			}
-			
-			String uuid = PlayerManager.getUUID(args[0]);
-			if (uuid == null) {
-				Chat.sendChat(sender, Chat.playerNotFound);
-				return;
-			}
-			Account acct = new Account(uuid);
-			double amount = acct.getBalance();
-			Chat.sendChat(sender, "The balance for " + acct.getName() + " is " + amount);
-		}
-		
-		if (args.length > 1) {
-			Chat.sendChat(sender, getCommandUsage(sender));
+		if (!(sender instanceof EntityPlayer && args.length == 0)) {
+			Chat.sendChat(sender, Chat.noConsole);
 			return;
 		}
-		
-		EntityPlayer player = (EntityPlayer) sender;
+			
+		if (args.length > 1) {
+			Chat.sendChat(sender, "You may only check one player's balance at a time");
+			return;
+		}
+			
 		String uuid = null;
 		
-		if (args.length == 0) uuid = player.getUniqueID().toString();
-		if (args.length == 1) {
+		if (args.length == 0) {
+			EntityPlayer player = (EntityPlayer) sender;
+			uuid = player.getUniqueID().toString();
+		} else {
 			uuid = PlayerManager.getUUID(args[0]);
-			if (uuid == null) {
-				Chat.sendChat(player, Chat.playerNotFound);
-				return;
-			}
+		}
+		
+		if (uuid == null) {
+			Chat.sendChat(sender, Chat.playerNotFound);
+			return;
 		}
 		
 		Account acct = new Account(uuid);
 		double amount = acct.getBalance();
-		Chat.sendChat(player, "The balance for " + acct.getName() + " is " + amount);
-		
-		
-
+		Chat.sendChat(sender, "The balance for " + acct.getName() + " is " + amount);
 	}
 
 	@Override
